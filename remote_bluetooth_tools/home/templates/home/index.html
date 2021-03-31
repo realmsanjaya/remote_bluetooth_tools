@@ -1,0 +1,44 @@
+{% extends "home/base.html" %}
+
+{% block content %} 
+<div class="container" id="search">
+    <form action="#" method="POST">
+        <label for="ip_address" class="form-label">Server IP Address</label>
+<input type="text" id="ip_address" class="form-control" aria-describedby="ipHelpBlock">
+<div id="ipHelpBlock" class="form-text">
+Enter the IP address of what you are searching for.</div>
+    </form>
+    <br>
+</div>
+<div class="container" id="listing">
+    {% for device in devices %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ device.device_name }}<span class="badge bg-success">New</span></h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ device.device_type }}</h6>
+          <a href="#" class="btn btn-info">Get Info</a>
+        </div>
+    </div>
+    {% endfor %}
+    
+</div>
+<br>
+<div class="container" id="commands">
+    
+        <button type="button" class="btn btn-primary">Enable Bluetooth</button>
+        
+        <button type="button" class="btn btn-primary">Start Scan</button>
+        
+        <button type="button" class="btn btn-primary">Use SDP Tools</button>
+       
+    
+</div>
+<!-- <hr size="8" width="90%" color="red"> -->
+<div class="container" id="output">
+    <hr size="8" width="90%" color="red">
+    <code>
+        Output of commands <br>
+        Down Here
+    </code>
+</div>
+{% endblock %}
