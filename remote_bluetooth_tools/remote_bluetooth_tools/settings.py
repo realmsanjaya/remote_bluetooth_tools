@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'home',
     
 ]
@@ -70,6 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'remote_bluetooth_tools.wsgi.application'
+ASGI_APPLICATION = 'remote_bluetooth_tools.asgi.application'
 
 
 # Database
