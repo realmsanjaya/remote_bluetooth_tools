@@ -14,8 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from home import views
+from django.urls import path, include
+from remote_bluetooth_tools.home import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'bluetoothdevices', views.BlueToothDeviceViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +27,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('debug/', views.debug, name='debug'),
     path('playground/', views.playground, name='playground'),
+    # path('api/', views.api, name='api')
+    path('api/', include(router.urls)),
+    path('api/', include('rest_framework.urls', namespace='rest_api'))
 ]

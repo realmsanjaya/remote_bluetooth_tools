@@ -1,5 +1,6 @@
 import datetime
 from django.db import models
+from django.utils import timezone
 
 
 # Create your models here.
@@ -29,7 +30,7 @@ class BluetoothDevice(models.Model):
     device_name = models.CharField(max_length=100)
     device_type = models.CharField(max_length=3, choices=DEVICE_TYPE)
     device_mac = models.CharField(max_length=100)
-    creation_date = models.DateTimeField(default=datetime.datetime.utcnow())
+    creation_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.device_name
