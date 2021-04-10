@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from remote_bluetooth_tools.home import views
+from home import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
@@ -29,5 +29,5 @@ urlpatterns = [
     path('playground/', views.playground, name='playground'),
     # path('api/', views.api, name='api')
     path('api/', include(router.urls)),
-    path('api/', include('rest_framework.urls', namespace='rest_api'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_api'))
 ]
