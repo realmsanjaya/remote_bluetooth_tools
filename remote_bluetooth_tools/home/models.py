@@ -27,6 +27,7 @@ class Person(models.Model):
 
 class BluetoothDevice(models.Model):
     """ This table will store the bluetooth devices """
+    sensor = models.CharField(max_length=100)
     device_name = models.CharField(max_length=100)
     device_type = models.CharField(max_length=3, choices=DEVICE_TYPE)
     device_mac = models.CharField(max_length=100)

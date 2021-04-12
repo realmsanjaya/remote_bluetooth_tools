@@ -7,7 +7,8 @@ def test_server():
     # Set constants
     URL = "http://127.0.0.1:8000/api/bluetoothdevices/"
     DEVICE = gen_devices()
-    requests.post(URL, data = DEVICE)
+    r = requests.post(URL, data = DEVICE)
+    print(r.status_code)
     return f"Success"
 
 if __name__ == '__main__':
