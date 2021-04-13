@@ -11,20 +11,37 @@ Enter the IP address of what you are searching for.</div>
     <br>
 </div>
 <div class="container" id="listing">
-    <div class="accordion" id="bluetoothdevices">
-        {% for device in devices %}
-        <h2 class="accordion-header" id="sensor1">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse"data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-                {{device.sensor}}
-            </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <strong>This is the first item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-            </div>
-          </div>
-          {% endfor %}
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Sensor</th>
+                <th scope="col">Device Name</th>
+                <th scope="col">Device Type</th>
+                <th scope="col">Device MAC</th>
+                <th scope="col">Creation Date</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for device in devices%}
+            <tr>
+                <td>{{device.sensor}}</td>
+                <td>{{device.device_name}}</td>
+                <td>{{device.device_type}}</td>
+                <td>{{device.device_mac}}</td>
+                <td>{{device.creation_date}}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-info">Info</button>
+                        <button type="button" class="btn btn-warning">Exploit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                      </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 
     <!-- {% for device in devices %}
     <div class="card" style="width: 18rem;">
