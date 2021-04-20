@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import BluetoothDevice
+from .models import BluetoothDevice, BluetoothService
 from rest_framework import viewsets
-from .serializers import BluetoothDeviceSerializer
+from .serializers import BluetoothDeviceSerializer, BluetoothServiceSerializer
 
 #from django.http import HttpResponse
 
@@ -32,3 +32,9 @@ class BlueToothDeviceViewSet(viewsets.ModelViewSet):
     """ This will allow the view of bluetooth devices """
     queryset = BluetoothDevice.objects.all()
     serializer_class = BluetoothDeviceSerializer
+
+# testing Bluetooth Device Service View
+class BlueToothServiceViewSet(viewsets.ModelViewSet):
+    """ This will allow the view of bluetooth services on a device """
+    queryset = BluetoothService.objects.all()
+    serializer_class = BluetoothServiceSerializer
