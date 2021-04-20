@@ -24,3 +24,10 @@ def gen_devices():
     device_mac = fake_data.mac_address()
     device = {'sensor': sensor, 'device_name': device_name, 'device_type': device_type, 'device_mac': device_mac}
     return device
+
+# testing this function that uses pybluez bluetooth.find_service
+def list_services():
+    """  This function lists Bluetooth services found for a device """
+    services = bluetooth.discover_devices(lookup_names=True)
+    print(services)
+    pass
