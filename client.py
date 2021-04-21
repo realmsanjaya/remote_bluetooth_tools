@@ -37,16 +37,27 @@ class Client:
         API = URL + ENDPOINT
         for service in list_services():
             data = {
-                "host": service['host'],
+                "host": "host",
                 "name": "devicename",
-                "description": service['description'],
-                "provider": service['provider'],
-                "protocol": service['protocol'],
-                "port": service['port'],
-                "service_classes": str(service['service-classes']),
-                "profiles": str(service['profiles']),
-                "service_id": service['service-id']
+                "description": "description",
+                "provider": "provier",
+                "protocol": "protocol",
+                "port": 8000,
+                "service_classes": "service_classes",
+                "profiles": "profiles",
+                "service_id": "service_id"
             }
+            # data = {
+            #     "host": service['host'],
+            #     "name": "devicename",
+            #     "description": service['description'],
+            #     "provider": service['provider'],
+            #     "protocol": service['protocol'],
+            #     "port": service['port'],
+            #     "service_classes": str(service['service-classes']),
+            #     "profiles": str(service['profiles']),
+            #     "service_id": service['service-id']
+            # }
             r = requests.post(API, data = json.dumps(data))
             print(r.status_code)
             print(json.dumps(data))
