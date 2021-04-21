@@ -39,15 +39,15 @@ class BluetoothDevice(models.Model):
 
 class BluetoothService(models.Model):
     """ This table will store discovered bluetooth services """
-    host = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=100)
-    provider = models.CharField(max_length=100)
-    protocol =models.CharField(max_length=100)
-    port = models.IntegerField()
-    service_classes = models.CharField(max_length=100)
-    profiles = models.CharField(max_length=100)
-    service_id =models.CharField(max_length=100)
+    host = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    description = models.CharField(max_length=100, blank=True, null=True)
+    provider = models.CharField(max_length=100, blank=True, null=True)
+    protocol = models.CharField(max_length=100, blank=True, null=True)
+    port = models.IntegerField(blank=True, null=True)
+    service_classes = models.CharField(max_length=100, blank=True, null=True)
+    profiles = models.CharField(max_length=100, blank=True, null=True)
+    service_id = models.CharField(max_length=100, blank=True, null=True)
     creation_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

@@ -20,6 +20,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'bluetoothdevices', views.BlueToothDeviceViewSet)
+router.register(r'bluetoothservices', views.BlueToothServiceViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -10,6 +10,7 @@ class BluetoothDeviceSerializer(serializers.HyperlinkedModelSerializer):
 
 # testing Bluetooth Service Serializer
 class BluetoothServiceSerializer(serializers.HyperlinkedModelSerializer):
-    model = BluetoothService
-    fields = ['host', 'name', 'description', 'provider', 'protocol', 'port', 'service_class', 'profiles', 'service_id']
-    # fields = '__all__'
+    class Meta:
+        model = BluetoothService
+        fields = ['host', 'name', 'description', 'provider', 'protocol', 'port', 'service_classes', 'profiles', 'service_id']
+        # fields = '__all__'
