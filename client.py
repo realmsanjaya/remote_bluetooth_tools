@@ -36,29 +36,30 @@ class Client:
         ENDPOINT = 'bluetoothservices/'
         API = URL + ENDPOINT
         for service in list_services():
-            data = {
-                "host": "host",
-                "name": "devicename",
-                "description": "description",
-                "provider": "provier",
-                "protocol": "protocol",
-                "port": 8000,
-                "service_classes": "service_classes",
-                "profiles": "profiles",
-                "service_id": "service_id"
-            }
             # data = {
-            #     "host": service['host'],
+            #     "host": "host",
             #     "name": "devicename",
-            #     "description": service['description'],
-            #     "provider": service['provider'],
-            #     "protocol": service['protocol'],
-            #     "port": service['port'],
-            #     "service_classes": str(service['service-classes']),
-            #     "profiles": str(service['profiles']),
-            #     "service_id": service['service-id']
+            #     "description": "description",
+            #     "provider": "provider",
+            #     "protocol": "protocol",
+            #     "port": 8000,
+            #     "service_classes": "service_classes",
+            #     "profiles": "profiles",
+            #     "service_id": "service_id"
             # }
-            r = requests.post(API, data = json.dumps(data))
+            data = {
+                "host": service['host'],
+                "name": "devicename",
+                "description": service['description'],
+                "provider": service['provider'],
+                "protocol": service['protocol'],
+                "port": service['port'],
+                "service_classes": str(service['service-classes']),
+                "profiles": str(service['profiles']),
+                "service_id": service['service-id']
+            }
+            # r = requests.post(API, data = json.dumps(data))
+            r = requests.post(API, data = data)
             print(r.status_code)
             print(json.dumps(data))
         return "Success!"
