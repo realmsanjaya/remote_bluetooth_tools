@@ -20,36 +20,61 @@ class Client:
         print(r.status_code)
         return f"Success"
 
+    def test_bluetoothservices(self):
+        """ This method is used to find bluetooth services """
+        URL = self.server
+        ENDPOINT = 'bluetoothservices/'
+        API = URL + ENDPOINT
+        for service in list_services():
+            data = {
+                "sensor": self.sensor_name,
+                "host": service['host'],
+                "name": service['name'],
+                "description": service['description'],
+                "provider": service['provider'],
+                "protocol": service['protocol'],
+                "port": service['port'],
+                "service_classes": str(service['service-classes']),
+                "profiles": str(service['profiles']),
+                "service_id": service['service-id']
+            }
+            # r = requests.post(API, data = json.dumps(data))
+            r = requests.post(API, data = data)
+            print(r.status_code)
+            print(json.dumps(data))
+        return "Success!"
+
     def start_scan(self):
         """ Used to start a scan for bluetooth device """
         # enable bluetooth
         # scan for devices
         # return device information in a json format
         devices = bluetooth.discover_devices(lookup_names=True)
+        
         for addr, name in devices:
+            data = {
+                "sensor": self.sensor_name,
+                "device_name": name,
+                "device_mac": addr,
+            }
+            URL = self.server
+            ENDPOINT = 'bluetoothdevices/'
+            API = URL + ENDPOINT
+            r = requests.post(API, data = data)
             print(f"Address: {addr}, Name: {name}")
-        return f'make something cool {self.device_name}'
+        return f'Success'
 
     def find_services(self):
         """ This method is used to find bluetooth services """
         URL = self.server
         ENDPOINT = 'bluetoothservices/'
         API = URL + ENDPOINT
-        for service in list_services():
-            # data = {
-            #     "host": "host",
-            #     "name": "devicename",
-            #     "description": "description",
-            #     "provider": "provider",
-            #     "protocol": "protocol",
-            #     "port": 8000,
-            #     "service_classes": "service_classes",
-            #     "profiles": "profiles",
-            #     "service_id": "service_id"
-            # }
+        devices = bluetooth.find_service()
+        for service in devices:
             data = {
+                "sensor": self.sensor_name,
                 "host": service['host'],
-                "name": "devicename",
+                "name": service['name'],
                 "description": service['description'],
                 "provider": service['provider'],
                 "protocol": service['protocol'],
@@ -67,4 +92,6 @@ class Client:
 if __name__ == '__main__':
     #test_server()
     device = Client(sensor_name="raspberry")
-    device.find_services()
+    device.test_bluetoothservices()
+    device.start_scan()
+    # device.find_services()
