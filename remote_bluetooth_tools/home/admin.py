@@ -10,8 +10,10 @@ class PersonAdmin(admin.ModelAdmin):
 
 @admin.register(BluetoothDevice)
 class BluetoothDeviceAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['sensor', 'device_name', 'device_mac', 'creation_date']
+    # pass
 
 @admin.register(BluetoothService)
 class BluetoothServiceAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['sensor', 'name', 'description', 'host']
+    # pass
