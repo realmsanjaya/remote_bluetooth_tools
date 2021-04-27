@@ -4,8 +4,8 @@ from .models import BluetoothDevice, BluetoothService
 class BluetoothDeviceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = BluetoothDevice
-        fields = ['sensor', 'device_name', 'device_mac', 'creation_date']
-        # fields = '__all__'
+        # fields = ['sensor', 'device_name', 'device_mac', 'creation_date']
+        fields = '__all__'
 
 
 # testing Bluetooth Service Serializer

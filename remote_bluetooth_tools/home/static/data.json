@@ -1,0 +1,78 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "name": "RaspberrySensor"
+        },
+        {
+            "id": 2,
+            "name": "Sensor001"
+        },
+        {
+            "id": 3,
+            "name": "Bluetooth Speakers"
+        },
+        {
+            "id": 4,
+            "name": "iPhone Device"
+        },
+        {
+            "id": 5,
+            "name": "Android Device"
+        },
+        {
+            "id": 6,
+            "name": "Samsung TV"
+        },
+        {
+            "id": 7,
+            "name": "Amazon Speakers"
+        },
+        {
+            "id": 8,
+            "name": "Laptop"
+        },
+        {
+            "id": 9,
+            "name": "Living Room TV"
+        },
+        {
+            "id": 10,
+            "name": "Tablet"
+        }
+    ],
+    "links": [
+        {
+            "source_id": 1,
+            "target_id": 3
+        },
+        {
+            "source_id": 1,
+            "target_id": 4
+        },
+        {
+            "source_id": 1,
+            "target_id": 5
+        },
+        {
+            "source_id": 1,
+            "target_id": 6
+        },
+        {
+            "source_id": 2,
+            "target_id": 7
+        },
+        {
+            "source_id": 2,
+            "target_id": 8
+        },
+        {
+            "source_id": 2,
+            "target_id": 9
+        },
+        {
+            "source_id": 2,
+            "target_id": 10
+        }
+    ]
+}

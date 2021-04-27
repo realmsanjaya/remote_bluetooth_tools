@@ -92,6 +92,6 @@ class Client:
 if __name__ == '__main__':
     #test_server()
     device = Client(sensor_name="raspberry")
-    device.test_bluetoothservices()
+    # device.test_bluetoothservices()
     device.start_scan()
     # device.find_services()
