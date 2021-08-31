@@ -1,0 +1,9 @@
+Datasource CSV
+https://cve.mitre.org/data/downloads/index.html
+
+NIST API Data Feeds
+https://nvd.nist.gov/vuln/data-feeds
+
+
+Mac Hardware Databases
+https://standards.ieee.org/products-services/regauth/index.html
