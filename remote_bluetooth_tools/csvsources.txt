@@ -7,3 +7,12 @@ https://nvd.nist.gov/vuln/data-feeds
 
 Mac Hardware Databases
 https://standards.ieee.org/products-services/regauth/index.html
+
+
+https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=bluetooth
+
+CVE-2021-3573
+
+https://services.nvd.nist.gov/rest/json/cve/1.0/CVE-2015-5611
+
+https://services.nvd.nist.gov/rest/json/cve/1.0/CVE-2021-3573
