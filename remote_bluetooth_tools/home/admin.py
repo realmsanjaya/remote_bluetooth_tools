@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Person, BluetoothDevice, BluetoothService
+from .models import Person, BluetoothDevice, BluetoothService, CVETable
 
 
 # Register your models here.
@@ -17,3 +17,7 @@ class BluetoothDeviceAdmin(admin.ModelAdmin):
 class BluetoothServiceAdmin(admin.ModelAdmin):
     list_display = ['sensor', 'name', 'description', 'host']
     # pass
+
+@admin.register(CVETable)
+class CVETableAdmin(admin.ModelAdmin):
+    pass

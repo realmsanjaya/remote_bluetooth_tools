@@ -11,6 +11,9 @@ def index(request): #Function based view
     devices = BluetoothDevice.objects.all()
     return render(request, 'home/index.html', {'devices': devices})
 
+def vulnerabilities(request):
+    return render(request, 'home/vulnerabilities.html')
+
 
 def about(request):
     return render(request, 'home/about.html')

@@ -53,3 +53,10 @@ class BluetoothService(models.Model):
 
     def __str__(self):
         return self.host
+
+class CVETable(models.Model):
+    cvename = models.CharField(max_length=100, blank=False, null=False)
+    data = models.JSONField()
+
+    def __str__(self):
+        return self.cvename
