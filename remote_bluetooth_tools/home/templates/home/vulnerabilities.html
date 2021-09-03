@@ -1,7 +1,19 @@
 {% extends "home/base.html" %}
-
-{% block content %} 
+{% block content %}
 <h1>Bluetooth Vulnerabilities</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere aperiam culpa quis autem! Neque vitae eum amet sint alias fugit accusantium perspiciatis natus, a dicta dolorum possimus enim necessitatibus officiis!</p>
-
+{{CVETable.cvename}}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Vulnerabilities</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vuln in vulns %}
+        <tr>
+            <td>{{ vulns }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

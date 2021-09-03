@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import BluetoothDevice, BluetoothService
+from .models import BluetoothDevice, BluetoothService, CVETable
 from rest_framework import viewsets
 from .serializers import BluetoothDeviceSerializer, BluetoothServiceSerializer
 
@@ -12,7 +12,9 @@ def index(request): #Function based view
     return render(request, 'home/index.html', {'devices': devices})
 
 def vulnerabilities(request):
-    return render(request, 'home/vulnerabilities.html')
+    vulns = CVETable.objects.all() #Added this
+    return render(request, 'home/vulnerabilities.html',
+    {'vulns':vulns})
 
 
 def about(request):
