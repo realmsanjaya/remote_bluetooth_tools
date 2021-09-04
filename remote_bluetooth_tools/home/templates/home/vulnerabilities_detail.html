@@ -1,19 +1,17 @@
 {% extends "home/base.html" %}
 {% block content %}
 <h1>Bluetooth Vulnerabilities</h1>
-<span>Total Results: {{ count }}</span>
+{{CVETable.cvename}}
 <table class="table">
     <thead>
         <tr>
-            <th>CVE ID</th>
-            <th>Description</th>
+            <th>Vulnerabilities</th>
         </tr>
     </thead>
     <tbody>
         {% for vuln in vulns %}
         <tr>
-            <td>{{ vuln.cve_id }}</td>
-            <td>{{ vuln.cve_description }}</td>
+            <td>{{ vulns }}</td>
         </tr>
         {% endfor %}
     </tbody>

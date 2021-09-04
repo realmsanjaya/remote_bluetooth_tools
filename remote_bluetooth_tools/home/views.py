@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import BluetoothDevice, BluetoothService, CVETable
 from rest_framework import viewsets
 from .serializers import BluetoothDeviceSerializer, BluetoothServiceSerializer
+from .datascraper import Scraper
 
 #from django.http import HttpResponse
 
@@ -12,9 +13,12 @@ def index(request): #Function based view
     return render(request, 'home/index.html', {'devices': devices})
 
 def vulnerabilities(request):
-    vulns = CVETable.objects.all() #Added this
+    #vulns = CVETable.objects.all() #Added this
+    data = Scraper()
+    vulns = data.get_cves_details()
+    count = len(vulns)
     return render(request, 'home/vulnerabilities.html',
-    {'vulns':vulns})
+    {'vulns':vulns,'count':count})
 
 
 def about(request):
