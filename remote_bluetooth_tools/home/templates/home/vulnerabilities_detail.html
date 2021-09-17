@@ -1,19 +1,8 @@
 {% extends "home/base.html" %}
 {% block content %}
-<h1>Bluetooth Vulnerabilities</h1>
-{{CVETable.cvename}}
-<table class="table">
-    <thead>
-        <tr>
-            <th>Vulnerabilities</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for vuln in vulns %}
-        <tr>
-            <td>{{ vulns }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h1>Bluetooth Vulnerability Detail</h1>
+<h2>CVE ID</h2>
+<p>{{ vuln.result.CVE_Items.0.cve.CVE_data_meta.ID }} </p>
+<h2>Vulnerability Description</h2>
+<p>{{ vuln.result.CVE_Items.0.cve.description.description_data.0.value }} </p>
 {% endblock %}

@@ -30,6 +30,7 @@ urlpatterns = [
     path('debug/', views.debug, name='debug'),
     path('playground/', views.playground, name='playground'),
     path('vulnerabilities/', views.vulnerabilities, name='vulnerabilities'),
+    path('vulnerability_detail/<str:cveid>', views.vulnerability_detail, name='vulnerability_detail'),
     # path('api/', views.api, name='api')
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_api'))

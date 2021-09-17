@@ -1,4 +1,6 @@
 import requests
+import json
+
 # Purpose to create a scraper
 
 class Scraper:
@@ -6,6 +8,11 @@ class Scraper:
         self.cveid = 'CVE-2021-3573'
         self.cve_url = 'https://services.nvd.nist.gov/rest/json/cve/1.0/'
         self.cves_url ='https://services.nvd.nist.gov/rest/json/cves/1.0?keyword=bluetooth'
+        self.cve_vulnerability_detail = 'https://services.nvd.nist.gov/rest/json/cve/1.0/'
+
+        """
+        https://services.nvd.nist.gov/rest/json/cve/1.0/CVE-2021-31612
+        """
 
     def statement(self):
         """ Prints out a statement """
@@ -30,7 +37,14 @@ class Scraper:
             cve_list.append(data)
         return cve_list
         
+    def vulnerability_detail(self, cveid):
+        """ Pull details of a vulnerability. Return data in JSON """
+        url = f"{self.cve_vulnerability_detail}{cveid}"
+        data = requests.get(url)
+        return json.loads(data.text)
+
 
 if __name__ =='__main__':
     data = Scraper()
-    print(data.get_cves_details())
+    #print(data.get_cves_details())
+    print(data.vulnerability_detail(cveid='CVE-2021-31612'))

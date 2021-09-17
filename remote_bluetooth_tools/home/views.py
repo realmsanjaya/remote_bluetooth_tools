@@ -37,6 +37,13 @@ def api(request):
     message = {'message': 'Hello World'}
     return render(request, context=message)
 
+def vulnerability_detail(request, cveid):
+    cve = cveid
+    data = Scraper()
+    vuln = data.vulnerability_detail(cveid=cve)
+    return render(request, 'home/vulnerabilities_detail.html',
+    {'vuln':vuln})
+
 class BlueToothDeviceViewSet(viewsets.ModelViewSet):
     """ This will allow the view of bluetooth devices """
     queryset = BluetoothDevice.objects.all()
