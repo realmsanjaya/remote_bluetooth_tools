@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Bluetooth Vulnerabilities</h1>
 <span>Total Results: {{ count }}</span>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>CVE ID</th>
@@ -12,10 +12,29 @@
     <tbody>
         {% for vuln in vulns %}
         <tr>
-            <td>{{ vuln.cve_id }}</td>
+            <td><a href="{% url 'vulnerability_detail' vuln.cve_id %}" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ vuln.cve_id }} </a></td>
             <td>{{ vuln.cve_description }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Vulnerability Detail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
