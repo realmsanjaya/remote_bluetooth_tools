@@ -31,6 +31,7 @@ class BluetoothDevice(models.Model):
     device_name = models.CharField(max_length=100)
     # device_type = models.CharField(max_length=3, choices=DEVICE_TYPE)
     device_mac = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
     creation_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

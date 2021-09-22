@@ -1,0 +1,58 @@
+{
+  "nodes": [
+    {
+      "id": 1,
+      "name": "SENSOR1"
+    },
+    {
+      "id": 2,
+      "name": "SENSOR2"
+    },
+    {
+      "id": 3,
+      "name": "SENSOR3"
+    },
+    {
+      "id": 4,
+      "name": "Bluetooth Headset"
+    },
+    {
+      "id": 5,
+      "name": "Big Screen TV"
+    },
+    {
+      "id": 6,
+      "name": "Camera"
+    },
+    {
+      "id": 7,
+      "name": "Building"
+    }
+  ],
+  "links": [
+    {
+      "source": 1,
+      "target": 4
+    },
+    {
+      "source": 2,
+      "target": 5
+    },
+    {
+      "source": 3,
+      "target": 6
+    },
+    {
+      "source": 1,
+      "target": 7
+    },
+    {
+      "source": 2,
+      "target": 7
+    },
+    {
+      "source": 3,
+      "target": 7
+    }
+  ]
+}
