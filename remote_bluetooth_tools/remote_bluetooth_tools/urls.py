@@ -29,6 +29,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('debug/', views.debug, name='debug'),
     path('playground/', views.playground, name='playground'),
+    path('devices/', views.devices, name='devices'),
     path('vulnerabilities/', views.vulnerabilities, name='vulnerabilities'),
     path('vulnerability_detail/<str:cveid>', views.vulnerability_detail, name='vulnerability_detail'),
     # path('api/', views.api, name='api')

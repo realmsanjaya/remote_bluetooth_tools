@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from .models import BluetoothDevice, BluetoothService, CVETable
 from rest_framework import viewsets
 from .serializers import BluetoothDeviceSerializer, BluetoothServiceSerializer
@@ -43,6 +44,40 @@ def vulnerability_detail(request, cveid):
     vuln = data.vulnerability_detail(cveid=cve)
     return render(request, 'home/vulnerabilities_detail.html',
     {'vuln':vuln})
+
+def devices(request):
+    # data = {'nodes':[
+    #     {
+    #         "id": 1,
+    #         "name": "A"
+    #     },
+    #     {
+    #         "id": 2,
+    #         "name": "B"
+    #     }
+    # ], 'links':[
+    #     {"source": 1},
+    #     {"target": 2}
+    # ]}
+    device_name = []
+    sensor = []
+    building = []
+    devices = BluetoothDevice.objects.all()
+    for device in devices:
+        d = {}
+        d["id"] = device.id
+        d["sensor"] = device.sensor
+        d["location"] = device.location
+        d["name"] = device.device_name
+        d["device_mac"] = device.device_mac
+        d["creation_date"] = device.creation_date
+        device_name.append(d)
+        sensor.append(device.sensor)
+        building.append(device.location)
+    unique_sensor = set(sensor)
+    unique_building = set(building)
+    data = {"nodes": device_name, "sensor": list(unique_sensor), "building": list(unique_building), "links": [] }
+    return JsonResponse(data)
 
 class BlueToothDeviceViewSet(viewsets.ModelViewSet):
     """ This will allow the view of bluetooth devices """
