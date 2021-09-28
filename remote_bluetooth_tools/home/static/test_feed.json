@@ -39,15 +39,38 @@
             "name": "Speaker",
             "device_mac": "21:21:21:21:21",
             "creation_date": "2021-09-23T23:37:11Z"
+        },
+        {
+            "id": 6,
+            "sensor": "SENSOR1",
+            "location": "Building1",
+            "name": "Raspberry PI",
+            "device_mac": "91:91:91:91:91",
+            "creation_date": "2021-09-27T23:23:38Z"
+        },
+        {
+            "id": 7,
+            "sensor": "SENSOR2",
+            "location": "BUILDING1",
+            "name": "Microphone",
+            "device_mac": "90:90:90:90:90",
+            "creation_date": "2021-09-27T23:43:32Z"
         }
     ],
     "sensor": [
-        "SENSOR2",
+        "SENSOR1",
         "SENSOR3",
-        "SENSOR1"
+        "SENSOR2"
     ],
     "building": [
+        "BUILDING1",
         "Building1"
     ],
-    "links": []
+    "links": [
+        {
+            "source": 2,
+            "target": 1,
+            "weight": 1
+        }
+    ]
 }

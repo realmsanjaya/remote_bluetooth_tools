@@ -62,6 +62,7 @@ def devices(request):
     device_name = []
     sensor = []
     building = []
+    links = []
     devices = BluetoothDevice.objects.all()
     for device in devices:
         d = {}
@@ -74,9 +75,19 @@ def devices(request):
         device_name.append(d)
         sensor.append(device.sensor)
         building.append(device.location)
-    unique_sensor = set(sensor)
+    # Associate the Building with the Sensor
+    for device in devices:
+        if device.location in building:
+            l = {}
+            l['sensor'] = device.sensor
+            print(set(l))
+
+    # Deduplicates the data
+    # TODO: Take each node, building, and sensor and output the JSON needed.
     unique_building = set(building)
-    data = {"nodes": device_name, "sensor": list(unique_sensor), "building": list(unique_building), "links": [] }
+    unique_sensor = set(sensor)
+    total_nodes = device_name
+    data = {"nodes": total_nodes, "sensor": list(unique_sensor), "building": list(unique_building), "links": [] }
     return JsonResponse(data)
 
 class BlueToothDeviceViewSet(viewsets.ModelViewSet):
