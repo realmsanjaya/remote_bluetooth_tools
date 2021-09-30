@@ -46,48 +46,61 @@ def vulnerability_detail(request, cveid):
     {'vuln':vuln})
 
 def devices(request):
-    # data = {'nodes':[
-    #     {
-    #         "id": 1,
-    #         "name": "A"
-    #     },
-    #     {
-    #         "id": 2,
-    #         "name": "B"
-    #     }
-    # ], 'links':[
-    #     {"source": 1},
-    #     {"target": 2}
-    # ]}
-    device_name = []
+    # Empty lists
+    all_devices = []
+    location = []
     sensor = []
-    building = []
+    nodes = []
     links = []
-    devices = BluetoothDevice.objects.all()
-    for device in devices:
-        d = {}
-        d["id"] = device.id
-        d["sensor"] = device.sensor
-        d["location"] = device.location
-        d["name"] = device.device_name
-        d["device_mac"] = device.device_mac
-        d["creation_date"] = device.creation_date
-        device_name.append(d)
-        sensor.append(device.sensor)
-        building.append(device.location)
-    # Associate the Building with the Sensor
-    for device in devices:
-        if device.location in building:
-            l = {}
-            l['sensor'] = device.sensor
-            print(set(l))
 
-    # Deduplicates the data
-    # TODO: Take each node, building, and sensor and output the JSON needed.
-    unique_building = set(building)
-    unique_sensor = set(sensor)
-    total_nodes = device_name
-    data = {"nodes": total_nodes, "sensor": list(unique_sensor), "building": list(unique_building), "links": [] }
+
+    # Database Query
+    devices = BluetoothDevice.objects.all()
+    # Logic
+    ## Query devices to populate our lists
+    for device in devices:
+        location.append(device.location)
+        sensor.append(device.sensor)
+        all_devices.append(device.device_name)
+
+    ## Unique data (Location, Sensors)
+    unique_location = list(set(location))
+    unique_sensor = list(set(sensor))
+
+    ### Populate node list with the unique location
+    for location in unique_location:
+        all_devices.append(location)
+
+    ## Populate node list with the unique sensor
+    for sensor in unique_sensor:
+        all_devices.append(sensor)
+
+    ## Populatine node list with all devices
+    for device in all_devices:
+        n = {}
+        n["name"] = device
+        nodes.append(n)
+
+    # Create the Links
+    for device in devices:
+        # Building to Sensor
+        source_node_building = all_devices.index(device.location)
+        target_node_sensor = all_devices.index(device.sensor)
+        b = {}
+        b["source"] = source_node_building
+        b["target"] = target_node_sensor
+        links.append(b)
+
+        # Sensor to Devices
+        source_node_sensor = all_devices.index(device.sensor)
+        target_node_device = all_devices.index(device.device_name)
+        s = {}
+        s["source"] = source_node_sensor
+        s["target"] = target_node_device
+        links.append(s)
+ 
+    # Export JSON Feed
+    data = {"nodes": nodes, "links": links, "location":  unique_location, "sensor": unique_sensor, "all_devices": all_devices }
     return JsonResponse(data)
 
 class BlueToothDeviceViewSet(viewsets.ModelViewSet):
