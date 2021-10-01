@@ -33,7 +33,8 @@ class Scraper:
         for result in results['result']['CVE_Items']:
             cve_id = result['cve']['CVE_data_meta']['ID']
             cve_description = result['cve']['description']['description_data'][0]['value']
-            data = {'cve_id':cve_id, 'cve_description':cve_description}
+            cve_baseScore = ['impact']
+            data = {'cve_id':cve_id, 'cve_description':cve_description, 'cve_baseScore': cve_baseScore}
             cve_list.append(data)
         return cve_list
         
