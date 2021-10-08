@@ -12,7 +12,8 @@
     <tbody>
         {% for vuln in vulns %}
         <tr>
-            <td><a href="{% url 'vulnerability_detail' vuln.cve_id %}" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ vuln.cve_id }} </a></td>
+            <!-- <td><a href="{% url 'vulnerability_detail' vuln.cve_id %}" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ vuln.cve_id }} </a></td> -->
+            <td><a href="{% url 'vulnerability_detail' vuln.cve_id %}">{{ vuln.cve_id }} </a></td>
             <td>{{ vuln.cve_description }}</td>
         </tr>
         {% endfor %}

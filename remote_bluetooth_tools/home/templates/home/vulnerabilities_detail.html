@@ -5,6 +5,33 @@
 <p>{{ vuln.result.CVE_Items.0.cve.CVE_data_meta.ID }} </p>
 <h2>Vulnerability Description</h2>
 <p>{{ vuln.result.CVE_Items.0.cve.description.description_data.0.value }} </p>
-<h2>Base Score</h2>
-{{ vuln }}
+
+<h2>Base Score:</h2>
+<p><span>Base Score:</span> {{ vuln.result.CVE_Items.0.impact.baseMetricV3.cvssV3.baseScore }}</p>
+
+
+<h2>Metrics</h2>
+<p><span>Attack Vector:</span> {{ vuln.result.CVE_Items.0.impact.baseMetricV3.cvssV3.attackVector }}</p>
+<p><span>Attack Complexity:</span> {{ vuln.result.CVE_Items.0.impact.baseMetricV3.cvssV3.attackComplexity }}</p>
+
+<h2>CIA Triad</h2>
+<p><span>Confidentiality:</span> {{ vuln.result.CVE_Items.0.impact.baseMetricV3.cvssV3.confidentialityImpact }}</p>
+<p><span>Integrity:</span> {{ vuln.result.CVE_Items.0.impact.baseMetricV3.cvssV3.integrityImpact }}</p>
+<p><span>Availability:</span> {{ vuln.result.CVE_Items.0.impact.baseMetricV3.cvssV3.availabilityImpact }}</p>
+
+
+<h2>References for {{ vuln.result.CVE_Items.0.cve.CVE_data_meta.ID }} </h2>
+{% for v in vuln.result.CVE_Items.0.cve.references.reference_data %}
+<a href="{{ v.url }}" target="_blank">{{ v.url }}</a><br>
+
+{% endfor %}
+
+<h2>Tags</h2>
+{% for v in vuln.result.CVE_Items.0.cve.references.reference_data %}
+{{ v.tags }}<br>
+{% endfor %}
+
+
+<!-- <h2>JSON Data</h2>
+{{ vuln }} -->
 {% endblock %}
