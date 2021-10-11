@@ -63,3 +63,11 @@ class CVETable(models.Model):
     def __str__(self):
         return self.cve_id
 
+
+class VulnerableTable(models.Model):
+    device = models.ForeignKey(BluetoothDevice, on_delete=models.CASCADE, null=True)
+    cve_vulnerability = models.ForeignKey(CVETable, on_delete=models.CASCADE, null=True)
+    creation_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Device: {self.device}-- Vulnerability: {self.cve_vulnerability}"

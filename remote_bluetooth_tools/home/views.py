@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import BluetoothDevice, BluetoothService, CVETable
+from .models import BluetoothDevice, BluetoothService, CVETable, VulnerableTable
 from rest_framework import viewsets
 from .serializers import BluetoothDeviceSerializer, BluetoothServiceSerializer
 from .datascraper import Scraper
@@ -11,7 +11,9 @@ from .datascraper import Scraper
 
 def index(request): #Function based view
     devices = BluetoothDevice.objects.all()
-    return render(request, 'home/index.html', {'devices': devices})
+    vulnerabilities = VulnerableTable.objects.all()
+    context = {'devices': devices, 'vulnerabilities': vulnerabilities}
+    return render(request, 'home/index.html', context )
 
 def vulnerabilities(request):
     #vulns = CVETable.objects.all() #Added this

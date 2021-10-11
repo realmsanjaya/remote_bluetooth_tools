@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Person, BluetoothDevice, BluetoothService, CVETable
+from .models import Person, BluetoothDevice, BluetoothService, CVETable, VulnerableTable
 
 
 # Register your models here.
@@ -21,3 +21,7 @@ class BluetoothServiceAdmin(admin.ModelAdmin):
 @admin.register(CVETable)
 class CVETableAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(VulnerableTable)
+class VulnerableTableAdmin(admin.ModelAdmin):
+    list_display = ['__str__']

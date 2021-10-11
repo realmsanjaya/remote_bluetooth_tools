@@ -19,13 +19,28 @@ class Scraper:
         url = self.cves_url
         r = requests.get(url)
         results = dict(r.json())
+        
+        # Convenience Method
+        # for result in results['result']['CVE_Items']:
+        #     cve_id = result['cve']['CVE_data_meta']['ID']
+        #     cve_description = result['cve']['description']['description_data'][0]['value']
+        #     cve_json = result
+        #     data = CVETable(cve_id=cve_id, cve_description=cve_description, data=cve_json)
+        #     obj, created = CVETable.objects.get_or_create(data)
+        #     created
+
         # Build dictionary
-        for result in results['result']['CVE_Items']:
+        for result in results['result']['CVE_Items']:  
             cve_id = result['cve']['CVE_data_meta']['ID']
-            cve_description = result['cve']['description']['description_data'][0]['value']
-            cve_json = result
-            data = CVETable(cve_id=cve_id, cve_description=cve_description, data=cve_json)
-            data.save()
+            try:
+                cve_id_database = CVETable.objects.filter(cve_id__exact=cve_id) # Query database for CVE-ID
+                if cve_id != cve_id_database:
+                    cve_description = result['cve']['description']['description_data'][0]['value']
+                    cve_json = result
+                    data = CVETable(cve_id=cve_id, cve_description=cve_description, data=cve_json)
+                    data.save()
+            except:
+                print(f"record {cve_id} exists")
 
 if __name__=="__main__":
     db_pull = Scraper()
