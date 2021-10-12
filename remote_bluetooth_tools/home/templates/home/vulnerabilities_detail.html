@@ -1,6 +1,7 @@
 {% extends "home/base.html" %}
 {% block content %}
 <h1>Bluetooth Vulnerability Detail</h1>
+<a href="{{ request.META.HTTP_REFERER }}" class="btn btn-success">Go Back...</a>
 <h2>CVE ID</h2>
 <p>{{ vuln.result.CVE_Items.0.cve.CVE_data_meta.ID }} </p>
 <h2>Vulnerability Description</h2>

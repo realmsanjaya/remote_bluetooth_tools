@@ -19,34 +19,38 @@ fill:#555;
 {% endblock %}
 
 {% block content %}
-<div id="network">
-
+<div class="col">
+  <div id="network">
+  </div>
 </div>
-<div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Device</th>
-        <th>CVE-ID</th>
-        <th>CVE Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for v in vulnerabilities %}
-      <tr>
-        <td>{{ v.device }}</td>
-        <td>{{ v.cve_vulnerability }}</td>
-        <td>{{ v.cve_vulnerability.cve_description }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="col">
+  <div id="Vulnerabilities">
+    <h4>Vulnerable Devices</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Device</th>
+          <th>CVE-ID</th>
+          <th>CVE Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for v in vulnerabilities %}
+        <tr>
+          <td>{{ v.device }}</td>
+          <td><a href="{% url 'vulnerability_detail' v.cve_vulnerability %}">{{ v.cve_vulnerability }}</a></td>
+          <td>{{ v.cve_vulnerability.cve_description|truncatechars:80 }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
 
 {% block script %}
 <script>
-  var width = 960,
+  var width = 1000,
     height = 500
 
 var svg = d3.select("body").append("svg")
@@ -54,9 +58,9 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 var force = d3.layout.force()
-    .gravity(.05)
+    .gravity(.03)
     .distance(100)
-    .charge(-100)
+    .charge(-200)
     .size([width, height]);
 
 d3.json("{% url 'devices' %}", function(json) {

@@ -24,7 +24,7 @@ router.register(r'bluetoothdevices', views.BlueToothDeviceViewSet)
 router.register(r'bluetoothservices', views.BlueToothServiceViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('', views.index, name='index'),
     path('about/', views.about, name='about'),
     path('debug/', views.debug, name='debug'),
