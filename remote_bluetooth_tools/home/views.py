@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import BluetoothDevice, BluetoothService, CVETable, VulnerableTable
 from rest_framework import viewsets
 from .serializers import BluetoothDeviceSerializer, BluetoothServiceSerializer
 from .datascraper import Scraper
+from .backgroundscraper import BackgroundScraper
+from .forms import DeviceForm
 
 #from django.http import HttpResponse
 
@@ -16,9 +18,9 @@ def index(request): #Function based view
     return render(request, 'home/index.html', context )
 
 def vulnerabilities(request):
-    #vulns = CVETable.objects.all() #Added this
-    data = Scraper()
-    vulns = data.get_cves_details()
+    vulns = CVETable.objects.all() #Added this
+    # data = Scraper()
+    # vulns = data.get_cves_details()
     count = len(vulns)
     return render(request, 'home/vulnerabilities.html',
     {'vulns':vulns,'count':count})
@@ -115,3 +117,14 @@ class BlueToothServiceViewSet(viewsets.ModelViewSet):
     """ This will allow the view of bluetooth services on a device """
     queryset = BluetoothService.objects.all()
     serializer_class = BluetoothServiceSerializer
+
+
+def update_bluetooth_database(request):
+    data = BackgroundScraper()
+    data.pull_cve_bluetooth()
+    return redirect('vulnerabilities')
+
+def add_device(request):
+    form = DeviceForm()
+    context = {'form': form}
+    return render(request, 'home/add_device.html', context)

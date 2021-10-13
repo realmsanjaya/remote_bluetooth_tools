@@ -34,5 +34,7 @@ urlpatterns = [
     path('vulnerability_detail/<str:cveid>', views.vulnerability_detail, name='vulnerability_detail'),
     # path('api/', views.api, name='api')
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_api'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_api')),
+    path('update-bluetooth-database', views.update_bluetooth_database, name='update-bluetooth-database'),
+    path('add-device/', views.add_device, name='add-device')
 ]

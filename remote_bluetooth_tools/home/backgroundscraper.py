@@ -4,7 +4,7 @@ from .models import CVETable
 
 # Purpose to create a scraper
 
-class Scraper:
+class BackgroundScraper:
     def __init__(self):
         self.cves_url ='https://services.nvd.nist.gov/rest/json/cves/1.0?keyword=bluetooth'
         self.cve_vulnerability_detail = 'https://services.nvd.nist.gov/rest/json/cve/1.0/'

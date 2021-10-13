@@ -57,7 +57,7 @@ class BluetoothService(models.Model):
 
 class CVETable(models.Model):
     cve_id = models.CharField(max_length=100, blank=False, null=False)
-    cve_description = models.CharField(max_length=500, blank=False, null=False)
+    cve_description = models.TextField(max_length=500, blank=False, null=False)
     data = models.JSONField()
 
     def __str__(self):
