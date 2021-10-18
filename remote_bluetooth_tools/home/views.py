@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 from .models import BluetoothDevice, BluetoothService, CVETable, VulnerableTable
 from rest_framework import viewsets
 from .serializers import BluetoothDeviceSerializer, BluetoothServiceSerializer
@@ -126,5 +127,22 @@ def update_bluetooth_database(request):
 
 def add_device(request):
     form = DeviceForm()
-    context = {'form': form}
-    return render(request, 'home/add_device.html', context)
+    if request.method == 'POST':
+        f = DeviceForm(request.POST)
+        if f.is_valid():
+        # Add data to the database
+            f.save()
+        return redirect('index')
+    else:
+        context = {'form': form}
+        return render(request, 'home/add_device.html', context)
+
+def search(request):
+    if request.method == "POST":
+        q = request.POST.get("search")
+        #print(f"DATA: {q}")
+        cves = CVETable.objects.filter(cve_description__contains=q)
+        count = len(cves)
+        context = {"cves":cves, "count":count}
+        return render(request, 'home/search.html', context)
+    return render(request, 'home/search.html')

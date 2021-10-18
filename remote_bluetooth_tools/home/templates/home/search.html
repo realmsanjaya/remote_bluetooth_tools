@@ -1,0 +1,25 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<h1>Search Bluetooth Vulnerabilities</h1>
+<div class="row">
+    <div class="col">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="search" id="search" placeholder="Search...">
+            <input type="submit" name="submit" value="Search">
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <span>Count: {{ count }}</span>
+        {% for cve in cves %}
+            <h5><a href="#">{{ cve.cve_id }}</a></h5>
+            <p>{{ cve.cve_description }}</p>
+            
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
