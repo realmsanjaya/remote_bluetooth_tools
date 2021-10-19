@@ -11,15 +11,20 @@
         </form>
     </div>
 </div>
+{% if cves %}
 <div class="row">
     <div class="col">
         <span>Count: {{ count }}</span>
         {% for cve in cves %}
-            <h5><a href="#">{{ cve.cve_id }}</a></h5>
+            <h5><a href="{% url 'vulnerability_detail' cve.cve_id %}">{{ cve.cve_id }}</a></h5>
+            <h6>Tags: <span class="badge bg-secondary">{{ cve.data.cve.references.reference_data.0.tags }}</span></h6>
             <p>{{ cve.cve_description }}</p>
             
         {% endfor %}
     </div>
 </div>
+{% else %}
+<p>Please search for something...</p>
 
+{% endif %}
 {% endblock %}

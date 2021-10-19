@@ -130,8 +130,15 @@ def add_device(request):
     if request.method == 'POST':
         f = DeviceForm(request.POST)
         if f.is_valid():
-        # Add data to the database
+            device_name = request.POST.get("device_name")
             f.save()
+            device = BluetoothDevice.objects.latest('creation_date')
+            cves = CVETable.objects.filter(cve_description__contains=device_name)
+            for cve in cves:
+                vuln = VulnerableTable(device=device, cve_vulnerability=cve)
+                vuln.save()
+        # Add data to the database
+           
         return redirect('index')
     else:
         context = {'form': form}
