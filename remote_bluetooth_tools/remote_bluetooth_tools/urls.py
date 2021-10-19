@@ -37,5 +37,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_api')),
     path('update-bluetooth-database', views.update_bluetooth_database, name='update-bluetooth-database'),
     path('add-device/', views.add_device, name='add-device'),
-    path('search/', views.search, name='search')
+    path('search/', views.search, name='search'),
+    path('paginate/', views.PaginateListView.as_view(), name='paginate')
 ]

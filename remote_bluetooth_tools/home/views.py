@@ -7,6 +7,7 @@ from .serializers import BluetoothDeviceSerializer, BluetoothServiceSerializer
 from .datascraper import Scraper
 from .backgroundscraper import BackgroundScraper
 from .forms import DeviceForm
+from django.views.generic import ListView
 
 #from django.http import HttpResponse
 
@@ -153,3 +154,12 @@ def search(request):
         context = {"cves":cves, "count":count}
         return render(request, 'home/search.html', context)
     return render(request, 'home/search.html')
+
+
+class PaginateListView(ListView):
+    paginate_by=10
+    model = CVETable
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
