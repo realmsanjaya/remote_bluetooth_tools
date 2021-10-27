@@ -1,10 +1,24 @@
-<h1>Pagination Example</h1>
+{% extends 'home/base.html' %}
 
-<ul>
-    {% for vuln in object_list %}
-    <li>{{ vuln }}</li>
-    {% endfor %}
-</ul>
+{% block content %}
+<h1>Vulnerability Listing</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>CVE-ID</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vuln in object_list %}
+        <tr>
+            <td>{{ vuln }}</td>
+            <td>{{ vuln.cve_description }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 <div class="pagination">
     <span class="step-links">
@@ -23,3 +37,4 @@
         {% endif %}
     </span>
 </div>
+{% endblock %}

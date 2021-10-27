@@ -8,6 +8,7 @@ from .datascraper import Scraper
 from .backgroundscraper import BackgroundScraper
 from .forms import DeviceForm
 from django.views.generic import ListView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #from django.http import HttpResponse
 
@@ -15,7 +16,15 @@ from django.views.generic import ListView
 
 def index(request): #Function based view
     devices = BluetoothDevice.objects.all()
-    vulnerabilities = VulnerableTable.objects.all()
+    vulnerabilities_list = VulnerableTable.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(vulnerabilities_list, 5)
+    try:
+        vulnerabilities = paginator.page(page)
+    except PageNotAnInteger:
+        vulnerabilities = paginator.page(1)
+    except EmptyPage:
+        vulnerabilities = paginator.page(paginator.num_pages)
     context = {'devices': devices, 'vulnerabilities': vulnerabilities}
     return render(request, 'home/index.html', context )
 
@@ -157,7 +166,7 @@ def search(request):
 
 
 class PaginateListView(ListView):
-    paginate_by=10
+    paginate_by=5
     model = CVETable
     
     def get_context_data(self, **kwargs):
