@@ -1,6 +1,6 @@
 import json
 import requests
-from utilities import gen_devices, list_services
+# from utilities import gen_devices, list_services
 import bluetooth
 
 
@@ -89,9 +89,22 @@ class Client:
             print(json.dumps(data))
         return "Success!"
 
+    def add_bluetooth_device(self, device_name, device_mac, location):
+        """ This method will add a device to the bluetooth device database """
+        sensor = self.sensor_name
+        device_name = device_name
+        device_mac = device_mac
+        location = location
+        device = {'sensor':sensor, 'device_name':device_name, 'device_mac':device_mac, 'location':location, 'creation_date':None}
+        api_url = f"{self.server}bluetoothdevices/"
+        data = requests.post(api_url, data=device)
+        return data
+
+
 if __name__ == '__main__':
     #test_server()
     device = Client(sensor_name="raspberry")
     # device.test_bluetoothservices()
-    device.start_scan()
+    # device.start_scan()
     # device.find_services()
+    device.add_bluetooth_device(device_name='Zephyr', device_mac='20:20:20:20', location='building01')

@@ -8,6 +8,8 @@ class BluetoothDeviceSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
+
+
 # testing Bluetooth Service Serializer
 class BluetoothServiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
