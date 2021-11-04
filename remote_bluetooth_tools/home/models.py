@@ -1,6 +1,8 @@
 import datetime
 from django.db import models
 from django.utils import timezone
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 # Create your models here.
@@ -71,3 +73,8 @@ class VulnerableTable(models.Model):
 
     def __str__(self):
         return f"Device: {self.device}-- Vulnerability: {self.cve_vulnerability}"
+
+@receiver(post_save, sender=BluetoothDevice)
+def search_vulnerabilities(sender, **kwargs):
+    # Logic goes here
+    print(f'Data: {sender.device_name}')
