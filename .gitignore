@@ -1,6 +1,5 @@
 venv
 .vscode
-*.sqlite3
 sqlite3.exe
 
 # Byte-compiled / optimized / DLL files
