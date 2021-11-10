@@ -75,6 +75,6 @@ class VulnerableTable(models.Model):
         return f"Device: {self.device}-- Vulnerability: {self.cve_vulnerability}"
 
 @receiver(post_save, sender=BluetoothDevice)
-def search_vulnerabilities(sender, **kwargs):
+def search_vulnerabilities(sender, instance, **kwargs):
     # Logic goes here
-    print(f'Data: {sender.device_name}')
+    print(f'Data: {instance()}')
