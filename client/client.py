@@ -3,11 +3,13 @@ import requests
 # from utilities import gen_devices, list_services
 import bluetooth
 
+# Constants
+SERVER = 'https://remotebluetoothtools.herokuapp.com/'
 
 class Client:
     def __init__(self, sensor_name):
         self.sensor_name = sensor_name
-        self.server = "http://127.0.0.1:8000/api/"
+        self.server = f'{SERVER}api/'
 
     def test_server(self):
         """ This method is used to simulate a client  """
