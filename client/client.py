@@ -4,7 +4,8 @@ import requests
 import bluetooth
 
 # Constants
-SERVER = 'https://remotebluetoothtools.herokuapp.com/'
+#SERVER = 'https://remotebluetoothtools.herokuapp.com/'
+SERVER = 'http://192.168.1.32:8000/' # Local Server
 
 class Client:
     def __init__(self, sensor_name):
@@ -57,7 +58,8 @@ class Client:
             data = {
                 "sensor": self.sensor_name,
                 "device_name": name,
-                "device_mac": addr,
+                "device_mac": '00:00:00:00:00:00',
+                "location" : "ROOM001"
             }
             URL = self.server
             ENDPOINT = 'bluetoothdevices/'
@@ -106,7 +108,7 @@ class Client:
 if __name__ == '__main__':
     #test_server()
     device = Client(sensor_name="raspberry")
+    device.start_scan()
     # device.test_bluetoothservices()
-    # device.start_scan()
     # device.find_services()
-    device.add_bluetooth_device(device_name='Zephyr', device_mac='20:20:20:20', location='building01')
+    #device.add_bluetooth_device(device_name='Zephyr', device_mac='20:20:20:20', location='building01')

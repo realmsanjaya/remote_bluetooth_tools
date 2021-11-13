@@ -13,4 +13,7 @@ python manage.py migrate
 
 python manage.py createsuperuser
 
+## Install on Raspberry Pi
+sudo apt-get install bluetooth bluez blueman
+
 ```
