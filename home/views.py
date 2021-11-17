@@ -92,6 +92,10 @@ def devices(request):
 
     ## Populatine node list with all devices
     for device in all_devices:
+        # Create a query for VulnerableTable for the particular device
+        vuln = VulnerableTable.objects.filter(device=1)
+        #print(devices) # TODO: Setup Devices
+        print(vuln)
         n = {}
         n["name"] = device
         nodes.append(n)
