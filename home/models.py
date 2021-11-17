@@ -77,4 +77,10 @@ class VulnerableTable(models.Model):
 @receiver(post_save, sender=BluetoothDevice)
 def search_vulnerabilities(sender, instance, **kwargs):
     # Logic goes here
-    print(f'Data: {instance()}')
+    print(f"Instance: {instance.device_name}")
+    # Code that does the query to find vulnerabilities based on name
+    device_name = instance
+    cves = CVETable.objects.filter(cve_description__contains=device_name)
+    for cve in cves:
+        vuln = VulnerableTable(device=device_name, cve_vulnerability=cve)
+        vuln.save()
