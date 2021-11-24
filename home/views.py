@@ -9,11 +9,13 @@ from .backgroundscraper import BackgroundScraper
 from .forms import DeviceForm
 from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 
 #from django.http import HttpResponse
 
 # Create your views here.
 
+@login_required
 def index(request): #Function based view
     devices = BluetoothDevice.objects.all()
     vulnerabilities_list = VulnerableTable.objects.all()
@@ -28,6 +30,7 @@ def index(request): #Function based view
     context = {'devices': devices, 'vulnerabilities': vulnerabilities}
     return render(request, 'home/index.html', context )
 
+@login_required
 def vulnerabilities(request):
     vulns = CVETable.objects.all() #Added this
     # data = Scraper()
@@ -36,23 +39,26 @@ def vulnerabilities(request):
     return render(request, 'home/vulnerabilities.html',
     {'vulns':vulns,'count':count})
 
-
+@login_required
 def about(request):
     return render(request, 'home/about.html')
 
-
+@login_required
 def debug(request):
     return render(request, 'home/debug.html')
 
+@login_required
 def playground(request):
     devices = BluetoothDevice.objects.all()
     return render(request, 'home/playground.html', 
     {'devices':devices})
 
+@login_required
 def api(request):
     message = {'message': 'Hello World'}
     return render(request, context=message)
 
+@login_required
 def vulnerability_detail(request, cveid):
     cve = cveid
     data = Scraper()
@@ -93,9 +99,10 @@ def devices(request):
     ## Populatine node list with all devices
     for device in all_devices:
         # Create a query for VulnerableTable for the particular device
-        vuln = VulnerableTable.objects.filter(device=1)
+        #vuln = VulnerableTable.objects.filter(device=1)
+        #2 vuln = )
         #print(devices) # TODO: Setup Devices
-        print(vuln)
+        #2 print(vuln)
         n = {}
         n["name"] = device
         nodes.append(n)
@@ -133,7 +140,7 @@ class BlueToothServiceViewSet(viewsets.ModelViewSet):
     queryset = BluetoothService.objects.all()
     serializer_class = BluetoothServiceSerializer
 
-
+@login_required
 def update_bluetooth_database(request):
     data = BackgroundScraper()
     data.pull_cve_bluetooth()
@@ -158,6 +165,7 @@ def add_device(request):
         context = {'form': form}
         return render(request, 'home/add_device.html', context)
 
+@login_required
 def search(request):
     if request.method == "POST":
         q = request.POST.get("search")

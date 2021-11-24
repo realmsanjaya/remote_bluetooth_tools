@@ -14,7 +14,7 @@ cursos:pointer;
 .node circle{
 stroke:#fff;
 stroke-width:3px;
-fill:#555;
+fill:#69b3a2;
 }
 {% endblock %}
 
@@ -29,6 +29,11 @@ fill:#555;
   <div class="col">
     <div id="Vulnerabilities">
       <h4>Vulnerable Devices</h4>
+      <div class="message">
+        {% if user.is_authenticated %}
+          <h5>Welcome: {{ user.username }}</h5>
+        {% endif %}
+      </div>
       <table class="table">
         <thead>
           <tr>

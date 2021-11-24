@@ -38,5 +38,7 @@ urlpatterns = [
     path('update-bluetooth-database', views.update_bluetooth_database, name='update-bluetooth-database'),
     path('add-device/', views.add_device, name='add-device'),
     path('search/', views.search, name='search'),
-    path('paginate/', views.PaginateListView.as_view(), name='paginate')
+    path('paginate/', views.PaginateListView.as_view(), name='paginate'),
+    path('accounts/', include('django.contrib.auth.urls'))
+
 ]
